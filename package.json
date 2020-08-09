@@ -1,0 +1,46 @@
+{
+  "name": "brilliant-errors",
+  "version": "1.0.0",
+  "description": "A set of functions to help your Apps and Libraries build brilliant error classes",
+  "main": "dist/cjs/index.js",
+  "module": "dist/es/index.js",
+  "typings": "dist/typings/index.js",
+  "files": [
+    "dist"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "npm-run-all": "^4.1.5",
+    "rimraf": "^3.0.2",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.7",
+    "uvu": "^0.3.2"
+  },
+  "scripts": {
+    "clear": "rimraf dist/es dist/cjs dist/typings",
+    "build": "run-s clear build:tsc",
+    "build:tsc": "run-p build:tsc:es build:tsc:cjs build:tsc:types",
+    "build:tsc:es": "yarn tsc -P tsconfig.es.json",
+    "build:tsc:cjs": "yarn tsc -P tsconfig.cjs.json",
+    "build:tsc:types": "yarn tsc -P tsconfig.es.json -d --outDir dist/typings",
+    "test": "yarn uvu tests -r ts-node/register",
+    "autoindex": "yarn do autoindex",
+    "latest": "yarn do latest -v"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/inocan-group/brilliant-errors.git"
+  },
+  "keywords": [
+    "error-management"
+  ],
+  "author": "Ken Snyder <ken@ken.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/inocan-group/brilliant-errors/issues"
+  },
+  "homepage": "https://github.com/inocan-group/brilliant-errors#readme",
+  "engines": {
+    "node": ">=12.0.0"
+  }
+}
