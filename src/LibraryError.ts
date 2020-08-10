@@ -1,12 +1,40 @@
 import { IDictionary } from "./index";
 import { ErrorKind, IExtendedError, IBaseErrorOptions } from "./types";
 
-export type ILibraryOptions<TCodes extends string = string, TErrors extends number = number> = IBaseErrorOptions<
-  TCodes,
-  TErrors
+export type ILibraryOptions<TCode extends string = string, TError extends number = number> = IBaseErrorOptions<
+  TCode,
+  TError
 >;
 
-export function createLibraryError<TCodes extends string = string, TErrors extends number = number>(
+//#region class-interfaces
+export interface ILibraryErrorConstructor<TCode extends string = string, TError extends number = number> {
+  new (message: string, code: TCode, options?: ILibraryOptions<TCode, TError>): ILibraryError<TCode, TError>;
+}
+
+export interface ILibraryError<TCode extends string = string, TError extends number = number> extends Error {
+  kind: Readonly<ErrorKind.LibraryError>;
+  /**
+   * The name of the library which threw the error
+   */
+  library: Readonly<string>;
+  /**
+   * The classification of the error a combination of the app's
+   * name and the error code passed in.
+   */
+  classification: Readonly<string>;
+  /**
+   * A string based code to classify the error
+   */
+  code: Readonly<TCode>;
+  /**
+   * An HTTP Error code; this is not required for an `AppError`'s but may be provided
+   * optionally.
+   */
+  errorCode?: Readonly<TError>;
+}
+//#endregion class-interfaces
+
+export function createLibraryError<TCode extends string = string, TError extends number = number>(
   /**
    * The library's name
    */
@@ -14,8 +42,8 @@ export function createLibraryError<TCodes extends string = string, TErrors exten
   /**
    * Default options
    */
-  defaultOptions: ILibraryOptions<TCodes, TErrors> = {}
-) {
+  defaultOptions: ILibraryOptions<TCode, TError> = {}
+): ILibraryErrorConstructor<TCode, TError> {
   /**
    * An Error thrown by library code which does _not_ require a numeric
    * HTTP error code on each throw. You may, however, include one where appropriate,
@@ -26,26 +54,12 @@ export function createLibraryError<TCodes extends string = string, TErrors exten
    * included (versus being defaulted to 'error'). This ensures that consumers of the library
    * can build conditional logic off of a reasonable
    */
-  class LibraryError extends Error implements IExtendedError {
+  class LibraryError extends Error implements ILibraryError<TCode, TError> {
     public readonly kind = ErrorKind.LibraryError;
-    /**
-     * The name of the library which threw the error
-     */
-    public library: string = library;
-    /**
-     * The classification of the error a combination of the app's
-     * name and the error code passed in.
-     */
-    public classification: string;
-    /**
-     * A string based code to classify the error
-     */
-    public code: TCodes;
-    /**
-     * An HTTP Error code; this is not required for an `AppError`'s but may be provided
-     * optionally.
-     */
-    public errorCode?: number;
+    public library: Readonly<string> = library;
+    public classification: Readonly<string>;
+    public code: Readonly<TCode>;
+    public errorCode?: Readonly<TError>;
 
     /**
      *
@@ -56,9 +70,9 @@ export function createLibraryError<TCodes extends string = string, TErrors exten
      * be included as part of the `classification` property
      * @param options a dictionary of params you _can_ but are _not required_ to set
      */
-    constructor(message: string, code: TCodes, options: ILibraryOptions<TCodes, TErrors> = {}) {
+    constructor(message: string, code: TCode, options: ILibraryOptions<TCode, TError> = {}) {
       super(`[ ${library} ]: ${message}`);
-      const opts: ILibraryOptions<TCodes, TErrors> = { ...defaultOptions, ...options };
+      const opts: ILibraryOptions<TCode, TError> = { ...defaultOptions, ...options };
       this.code = code;
       this.classification = `${library}/${code}`;
       if (opts.errorCode) {

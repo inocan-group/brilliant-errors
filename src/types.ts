@@ -1,3 +1,5 @@
+import { IAppOptions } from ".";
+
 export type IDictionary<T = any> = {
   [key: string]: T;
 };
@@ -9,10 +11,10 @@ export enum ErrorKind {
 }
 
 export interface IExtendedError extends Error {
-  kind?: string;
-  code: string;
-  errorCode?: number;
-  errorMessage?: string;
+  kind?: Readonly<string>;
+  code: Readonly<string>;
+  errorCode?: Readonly<number>;
+  errorMessage?: Readonly<string>;
 }
 
 export interface IBaseErrorOptions<TCodes extends string = string, TErrors extends number = number> {
