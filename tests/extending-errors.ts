@@ -23,8 +23,8 @@ extending("Calling createLibraryError() produces correct error class and props",
 });
 
 extending("Calling createApiGatewayError() produces correct error class and props", () => {
-  class MyError extends createApiGatewayError("MyFn") {}
-  const e = new MyError("we got a problem");
+  class MyError extends createApiGatewayError("MyProject", "MyFn") {}
+  const e = new MyError(400, "we got a problem");
   assert.ok(e instanceof MyError);
   assert.equal(e.kind, ErrorKind.ApiGatewayError);
   assert.match(e.message, "MyFn");

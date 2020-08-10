@@ -1,46 +1,51 @@
-import { IDictionary, ErrorKind } from "./types";
+import { IBaseErrorOptions, ErrorKind } from "./index";
 
-export interface IAppOptions<T extends Error = Error> {
-  errorCode?: number;
-  stackCallback?: (stack: string) => string[];
-  /**
-   * Proxy an already thrown error. This will ensure that the original
-   * error's message is added to end of this message as well as
-   *
-   */
-  proxy?: T;
+export interface IAppOptions<TCode extends string = string, TError extends number = number>
+  extends IBaseErrorOptions<TCode, TError> {}
+
+//#region class-interfaces
+export interface IAppErrorConstructor<TCode extends string = string, TError extends number = number> {
+  new (message: string, code?: TCode, options?: IAppOptions<TCode, TError>): IAppError<TCode, TError>;
 }
 
-export function createAppError<TCode extends string = string>(
-  appName: string,
-  defaultOptions: Omit<IAppOptions, "proxy"> = {}
-) {
+export interface IAppError<TCode extends string = string, TError extends number = number> extends Error {
+  kind: Readonly<ErrorKind.AppError>;
   /**
-   * An Error thrown by a application which does _not_ require a numeric
-   * HTTP error code on each throw. You may, however, include one where appropriate,
-   * and you have the option when configuring the error to state a "default" HTTP code
-   * (though no default will be provided unless you state it)
+   * The name of the APP which threw the error
    */
-  class AppError extends Error {
+  app: Readonly<string>;
+  /**
+   * The classification of the error a combination of the app's
+   * name and the error code passed in.
+   */
+  classification: Readonly<string>;
+  /**
+   * A string based code to classify the error
+   */
+  code: Readonly<TCode>;
+  /**
+   * An HTTP Error code; this is not required for an `AppError`'s but may be provided
+   * optionally.
+   */
+  errorCode?: Readonly<TError>;
+}
+//#endregion class-interfaces
+
+/**
+ * An Error thrown by a application. A string based "code" for the error can be added to errors
+ * when throwing but isn't strictly required.
+ */
+export function createAppError<TCode extends string = string, TError extends number = number>(
+  appName: string,
+  defaultOptions: IAppOptions<TCode, TError> = {}
+): IAppErrorConstructor<TCode, TError> {
+  // CLASS DEFINITION
+  class AppError extends Error implements IAppError<TCode, TError> {
     public readonly kind = ErrorKind.AppError;
-    /**
-     * The name of the APP which threw the error
-     */
-    public app: string = appName;
-    /**
-     * The classification of the error a combination of the app's
-     * name and the error code passed in.
-     */
-    public classification: string;
-    /**
-     * A string based code to classify the error
-     */
-    public code: TCode;
-    /**
-     * An HTTP Error code; this is not required for an `AppError`'s but may be provided
-     * optionally.
-     */
-    public errorCode?: number;
+    public readonly app: string = appName;
+    public readonly classification: string;
+    public readonly code: TCode;
+    public readonly errorCode?: TError;
 
     /**
      *
@@ -51,9 +56,9 @@ export function createAppError<TCode extends string = string>(
      * be included as part of the `classification` property
      * @param options a dictionary of params you _can_ but are _not required_ to set
      */
-    constructor(message: string, code: TCode = "error" as TCode, options: IAppOptions = {}) {
+    constructor(message: string, code: TCode = "error" as TCode, options: IAppOptions<TCode, TError> = {}) {
       super(`[ ${appName} ]: ${message}`);
-      const opts: IAppOptions = { ...defaultOptions, ...options };
+      const opts: IAppOptions<TCode, TError> = { ...defaultOptions, ...options };
       this.code = code;
       this.classification = `${appName}/${code}`;
       if (opts.errorCode) {
