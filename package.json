@@ -1,6 +1,6 @@
 {
   "name": "brilliant-errors",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "A set of functions to help your Apps and Libraries build brilliant error classes",
   "main": "dist/cjs/index.js",
   "module": "dist/es/index.js",
