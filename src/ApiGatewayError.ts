@@ -1,20 +1,29 @@
-import { ErrorKind, IBaseErrorOptions, IExtendedError } from "./types";
+import { ErrorKind, IBaseErrorOptions, IExtendedError } from "./types/general";
 
-export interface IApiGatewayOptions<TCode extends string = string, TError extends number = number>
-  extends IBaseErrorOptions<TCode, TError> {
+export interface IApiGatewayOptions<
+  TCode extends string = string,
+  TError extends number = number
+> extends IBaseErrorOptions<TCode, TError> {
   fnParams?: any[];
   code?: TCode;
 }
 
 //#region class-interfaces
-export interface IApiGatewayErrorConstructor<TCode extends string = string, TError extends number = number> {
-  new (errorCode: TError, errorMessage: string, options?: IApiGatewayOptions<TCode, TError>): IApiGatewayError<
-    TCode,
-    TError
-  >;
+export interface IApiGatewayErrorConstructor<
+  TCode extends string = string,
+  TError extends number = number
+> {
+  new (
+    errorCode: TError,
+    errorMessage: string,
+    options?: IApiGatewayOptions<TCode, TError>
+  ): IApiGatewayError<TCode, TError>;
 }
 
-export interface IApiGatewayError<TCode extends string = string, TError extends number = number> extends Error {
+export interface IApiGatewayError<
+  TCode extends string = string,
+  TError extends number = number
+> extends Error {
   kind: Readonly<ErrorKind.ApiGatewayError>;
   /**
    * The name of the serverless project / repo
@@ -49,7 +58,10 @@ export interface IApiGatewayError<TCode extends string = string, TError extends 
  * and you have the option when configuring the error to state a "default" HTTP code
  * (though no default will be provided unless you state it)
  */
-export function createApiGatewayError<TCode extends string = string, TError extends number = number>(
+export function createApiGatewayError<
+  TCode extends string = string,
+  TError extends number = number
+>(
   projectName: string,
   fnName: string,
   defaultOptions: IApiGatewayOptions<TCode, TError> = {}
@@ -71,13 +83,19 @@ export function createApiGatewayError<TCode extends string = string, TError exte
      * @param message a string-based, human friendly message
      * @param options a dictionary of params you _can_ but are _not required_ to set
      */
-    constructor(errorCode: TError, errorMessage: string, options: IApiGatewayOptions<TCode, TError> = {}) {
+    constructor(
+      errorCode: TError,
+      errorMessage: string,
+      options: IApiGatewayOptions<TCode, TError> = {}
+    ) {
       super(`[ ${projectName}.${fnName}() / ${String(errorCode)} ]: ${errorMessage}`);
       const opts: IApiGatewayOptions<TCode, TError> = { ...defaultOptions, ...options };
       this.code = opts.code || ("error" as TCode);
       this.classification = `${projectName}/${fnName}`;
       this.errorCode = errorCode;
-      this.errorMessage = `[ ${projectName}.${fnName}() / ${String(errorCode)} ]: ${errorMessage}`;
+      this.errorMessage = `[ ${projectName}.${fnName}() / ${String(
+        errorCode
+      )} ]: ${errorMessage}`;
     }
   }
 

@@ -1,40 +1,14 @@
-import { IDictionary } from "./index";
-import { ErrorKind, IExtendedError, IBaseErrorOptions } from "./types";
+import {
+  ErrorKind,
+  ILibraryError,
+  ILibraryErrorConstructor,
+  ILibraryOptions,
+} from "../types";
 
-export type ILibraryOptions<TCode extends string = string, TError extends number = number> = IBaseErrorOptions<
-  TCode,
-  TError
->;
-
-//#region class-interfaces
-export interface ILibraryErrorConstructor<TCode extends string = string, TError extends number = number> {
-  new (message: string, code: TCode, options?: ILibraryOptions<TCode, TError>): ILibraryError<TCode, TError>;
-}
-
-export interface ILibraryError<TCode extends string = string, TError extends number = number> extends Error {
-  kind: Readonly<ErrorKind.LibraryError>;
-  /**
-   * The name of the library which threw the error
-   */
-  library: Readonly<string>;
-  /**
-   * The classification of the error a combination of the app's
-   * name and the error code passed in.
-   */
-  classification: Readonly<string>;
-  /**
-   * A string based code to classify the error
-   */
-  code: Readonly<TCode>;
-  /**
-   * An HTTP Error code; this is not required for an `AppError`'s but may be provided
-   * optionally.
-   */
-  errorCode?: Readonly<TError>;
-}
-//#endregion class-interfaces
-
-export function createLibraryError<TCode extends string = string, TError extends number = number>(
+export function createLibraryError<
+  TCode extends string = string,
+  TError extends number = number
+>(
   /**
    * The library's name
    */
@@ -52,7 +26,7 @@ export function createLibraryError<TCode extends string = string, TError extends
    *
    * Unlike, `AppError`'s, the `LibraryError` _does_ require that a string based code be
    * included (versus being defaulted to 'error'). This ensures that consumers of the library
-   * can build conditional logic off of a reasonable
+   * can build conditional logic off of a reasonable categorical name.
    */
   class LibraryError extends Error implements ILibraryError<TCode, TError> {
     public readonly kind = ErrorKind.LibraryError;
@@ -68,9 +42,15 @@ export function createLibraryError<TCode extends string = string, TError extends
      * @param code A string-based classification of the error; this aligns with the
      * latest versions of Node which has a string based "code". This code will _also_
      * be included as part of the `classification` property
-     * @param options a dictionary of params you _can_ but are _not required_ to set
+     * @param options a dictionary of params you _can_ but are _not required_ to set;
+     * this includes setting the `httpCode` which is a numeric HTTP error code (if not
+     * set then the default HTTP code will be used)
      */
-    constructor(message: string, code: TCode, options: ILibraryOptions<TCode, TError> = {}) {
+    constructor(
+      message: string,
+      code: TCode,
+      options: ILibraryOptions<TCode, TError> = {}
+    ) {
       super(`[ ${library} ]: ${message}`);
       const opts: ILibraryOptions<TCode, TError> = { ...defaultOptions, ...options };
       this.code = code;

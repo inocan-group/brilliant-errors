@@ -1,22 +1,16 @@
 {
   "name": "brilliant-errors",
-  "version": "0.1.1",
-  "description": "A set of functions to help your Apps and Libraries build brilliant error classes",
+  "version": "0.2.0",
+  "description": "A set of configurators to help your Apps and Libraries build brilliant error classes",
   "main": "dist/cjs/index.js",
   "module": "dist/es/index.js",
   "typings": "dist/typings/index.js",
   "files": [
     "dist"
   ],
-  "dependencies": {},
-  "devDependencies": {
-    "npm-run-all": "^4.1.5",
-    "rimraf": "^3.0.2",
-    "ts-node": "^8.10.2",
-    "typescript": "^3.9.7",
-    "uvu": "^0.3.2"
-  },
   "scripts": {
+    "autoindex": "yarn do autoindex",
+    "lint": "eslint src/**/*.ts && eslint tests/**/*.ts",
     "clear": "rimraf dist/es dist/cjs dist/typings",
     "build": "run-s clear build:tsc",
     "build:tsc": "run-p build:tsc:es build:tsc:cjs build:tsc:types",
@@ -24,8 +18,31 @@
     "build:tsc:cjs": "yarn tsc -P tsconfig.cjs.json",
     "build:tsc:types": "yarn tsc -P tsconfig.es.json -d --outDir dist/typings",
     "test": "yarn uvu tests -r ts-node/register",
-    "autoindex": "yarn do autoindex",
     "latest": "yarn do latest -v"
+  },
+  "dependencies": {
+    "common-types": "^1.18.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.12.0",
+    "@typescript-eslint/parser": "^4.12.0",
+    "do-devops": "^0.5.5",
+    "eslint": "^7.17.0",
+    "eslint-config-prettier": "^7.1.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.3.1",
+    "eslint-plugin-promise": "^4.2.1",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.2.1",
+    "rimraf": "^3.0.2",
+    "rollup": "^2.36.1",
+    "rollup-plugin-analyzer": "^4.0.0",
+    "rollup-plugin-multi-input": "^1.2.0",
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup-plugin-typescript2": "^0.29.0",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.1.3",
+    "uvu": "^0.5.1"
   },
   "repository": {
     "type": "git",

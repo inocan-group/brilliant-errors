@@ -1,6 +1,9 @@
 import { ErrorKind } from "./index";
 
-export abstract class BrilliantError<TCode extends string = string, TError extends number = number> {
+export abstract class BrilliantError<
+  TCode extends string = string,
+  TError extends number = number
+> {
   public readonly kind = ErrorKind;
 
   /**
