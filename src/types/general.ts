@@ -79,7 +79,7 @@ export interface IErrorBaseline<
  * Options available to all brilliant errors
  */
 export interface IBaseErrorOptions<
-  TCode extends string = string,
+  _TCode extends string = string,
   THttp extends number = number,
   TUnderlying extends Error = Error
 > {

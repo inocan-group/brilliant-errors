@@ -53,7 +53,7 @@ export function createServerlessError<
        * Additional characteristics which should be added
        * to the error.
        */
-      options: {}
+      _options: {}
     ) {
       const se = new ServerlessError(err.message, code, {
         name: err.name || type,

@@ -18,6 +18,6 @@ import type { IServerlessError } from "../types";
  *
  * - Docs: [Handle Lambda errors in API Gateway](https://docs.aws.amazon.com/apigateway/latest/developerguide/handle-errors-in-lambda-integration.html)
  */
-export function convertToApiGatewayError(err: IServerlessError) {
+export function convertToApiGatewayError(_err: IServerlessError) {
   //
 }

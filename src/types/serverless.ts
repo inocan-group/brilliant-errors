@@ -2,14 +2,6 @@ import type { IAWSLambaContext } from "common-types";
 import { ErrorKind, IBaseErrorOptions, IErrorBaseline } from "./general";
 
 /**
- * Options that can be configured when configuring the error class
- */
-export type IServerlessConfig<
-  TCode extends string = string,
-  THttp extends number = number
-> = IServerlessOptions<TCode, THttp> & {};
-
-/**
  * Options that can be passed into the error at run time
  */
 export type IServerlessOptions<TCode extends string = string, THttp extends number = number> = {
@@ -33,6 +25,14 @@ export type IServerlessOptions<TCode extends string = string, THttp extends numb
    */
   ctx?: IAWSLambaContext;
 } & IBaseErrorOptions<TCode, THttp>;
+
+/**
+ * Options that can be configured when configuring the error class
+ */
+export type IServerlessConfig<
+  TCode extends string = string,
+  THttp extends number = number
+> = IServerlessOptions<TCode, THttp> & {};
 
 //#region class-interfaces
 export interface IServerlessErrorConstructor<
