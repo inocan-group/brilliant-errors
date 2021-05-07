@@ -12,10 +12,13 @@ export type IServerlessConfig<
 /**
  * Options that can be passed into the error at run time
  */
-export type IServerlessOptions<
-  TCode extends string = string,
-  THttp extends number = number
-> = {
+export type IServerlessOptions<TCode extends string = string, THttp extends number = number> = {
+  /**
+   * This property is typically not set directly but rather becomes
+   * the _name_ of the underlying error (if there is one) or falls back
+   * to the error class's name.
+   */
+  name?: string;
   /**
    * The name of the serverless handler function
    */
@@ -36,11 +39,10 @@ export interface IServerlessErrorConstructor<
   TCode extends string = string,
   THttp extends number = number
 > {
-  new (
-    message: string,
-    code: TCode,
-    options?: IServerlessOptions<TCode, THttp>
-  ): IServerlessError<TCode, THttp>;
+  new (message: string, code: TCode, options?: IServerlessOptions<TCode, THttp>): IServerlessError<
+    TCode,
+    THttp
+  >;
 }
 
 export interface IServerlessError<

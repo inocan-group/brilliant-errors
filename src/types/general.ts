@@ -1,7 +1,3 @@
-export type IDictionary<T = any> = {
-  [key: string]: T;
-};
-
 export enum ErrorKind {
   AppError = "AppError",
   LibraryError = "LibraryError",
@@ -50,7 +46,7 @@ export interface IErrorBaseline<
    * }
    * ```
    */
-  name: ErrorType;
+  name: ErrorType | string;
 
   type: string;
 

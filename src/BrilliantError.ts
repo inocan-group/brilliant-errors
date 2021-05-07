@@ -1,4 +1,4 @@
-import { ErrorKind } from "./index";
+import { ErrorKind } from "./types";
 
 export abstract class BrilliantError<
   TCode extends string = string,

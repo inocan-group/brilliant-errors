@@ -35,12 +35,12 @@ export function createAppError<TCode extends string = string, THttp extends numb
       options: IAppOptions<TCode, THttp> = {}
     ) {
       super(`[ ${appName} ]: ${message}`);
-      const opts: IAppOptions<TCode, THttp> = { ...defaultOptions, ...options };
+      const opts = { ...defaultOptions, ...options };
       this.type = appName;
       this.code = code;
       this.classification = `${appName}/${code}`;
       if (opts.httpCode) {
-        this.httpCode = opts.httpCode;
+        this.httpCode = opts.httpCode as THttp;
       }
     }
   }

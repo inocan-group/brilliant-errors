@@ -1,14 +1,6 @@
-import {
-  ErrorKind,
-  ILibraryError,
-  ILibraryErrorConstructor,
-  ILibraryOptions,
-} from "../types";
+import { ErrorKind, ILibraryError, ILibraryErrorConstructor, ILibraryOptions } from "../types";
 
-export function createLibraryError<
-  TCode extends string = string,
-  TError extends number = number
->(
+export function createLibraryError<TCode extends string = string, THttp extends number = number>(
   /**
    * The library's name
    */
@@ -16,8 +8,8 @@ export function createLibraryError<
   /**
    * Default options
    */
-  defaultOptions: ILibraryOptions<TCode, TError> = {}
-): ILibraryErrorConstructor<TCode, TError> {
+  defaultOptions: ILibraryOptions<TCode, THttp> = {}
+): ILibraryErrorConstructor<TCode, THttp> {
   /**
    * An Error thrown by library code which does _not_ require a numeric
    * HTTP error code on each throw. You may, however, include one where appropriate,
@@ -28,12 +20,12 @@ export function createLibraryError<
    * included (versus being defaulted to 'error'). This ensures that consumers of the library
    * can build conditional logic off of a reasonable categorical name.
    */
-  class LibraryError extends Error implements ILibraryError<TCode, TError> {
+  class LibraryError extends Error implements ILibraryError<TCode, THttp> {
     public readonly kind = ErrorKind.LibraryError;
     public library: Readonly<string> = library;
     public classification: Readonly<string>;
     public code: Readonly<TCode>;
-    public errorCode?: Readonly<TError>;
+    public httpCode?: Readonly<THttp>;
 
     /**
      *
@@ -46,17 +38,13 @@ export function createLibraryError<
      * this includes setting the `httpCode` which is a numeric HTTP error code (if not
      * set then the default HTTP code will be used)
      */
-    constructor(
-      message: string,
-      code: TCode,
-      options: ILibraryOptions<TCode, TError> = {}
-    ) {
+    constructor(message: string, code: TCode, options: ILibraryOptions<TCode, THttp> = {}) {
       super(`[ ${library} ]: ${message}`);
-      const opts: ILibraryOptions<TCode, TError> = { ...defaultOptions, ...options };
+      const opts: ILibraryOptions<TCode, THttp> = { ...defaultOptions, ...options };
       this.code = code;
       this.classification = `${library}/${code}`;
-      if (opts.errorCode) {
-        this.errorCode = opts.errorCode;
+      if (opts.httpCode) {
+        this.httpCode = opts.httpCode || (500 as THttp);
       }
     }
   }

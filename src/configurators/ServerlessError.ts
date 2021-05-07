@@ -1,6 +1,5 @@
 import {
   ErrorKind,
-  ILibraryErrorConstructor,
   IServerlessConfig,
   IServerlessError,
   IServerlessErrorConstructor,
@@ -30,9 +29,7 @@ export function createServerlessError<
   /**
    * An error associated with Serverless functions.
    */
-  class ServerlessError
-    extends Error
-    implements IServerlessError<TCode, THttp, TRequest> {
+  class ServerlessError extends Error implements IServerlessError<TCode, THttp, TRequest> {
     public readonly name = type;
     public readonly type = type;
     public readonly kind = ErrorKind.ServerlessError;
@@ -77,18 +74,17 @@ export function createServerlessError<
      * this includes setting the `httpCode` which is a numeric HTTP error code (if not
      * set then the default HTTP code will be used)
      */
-    constructor(
-      message: string,
-      code: TCode,
-      options: IServerlessOptions<TCode, THttp> = {}
-    ) {
+    constructor(message: string, code: TCode, options: IServerlessOptions<TCode, THttp> = {}) {
       super(`[ ${type}/${code} ]: ${message}`);
+      if (this.structuredMessage) {
+        this.message = JSON.stringify(this);
+      }
       const opts: IServerlessOptions<TCode, THttp> = { ...defaultOptions, ...options };
       this.name = opts.underlying ? opts.underlying.name : type;
       this.handlerFn = opts.handlerFn || "";
       this.code = code;
       this.classification = `${type}/${code}`;
-      this.httpCode = opts.httpCode || 500;
+      this.httpCode = opts.httpCode || (500 as THttp);
     }
   }
 
