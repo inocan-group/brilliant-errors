@@ -1,9 +1,34 @@
-describe("basics/builders return error class", () => {
-  it("createAppError() produces correct error class and props", () => {
-    expect(true).toBeTruthy();
+import { BaseBrilliance } from "~/@types";
+import { createError } from "~/configurators";
+
+describe("using MessageContructor", () => {
+  it("createError() with no options produces flexible error class and props", () => {
+    type Type = "config" | "execution";
+    const MyError = createError<Type>("MyError", "MyApp");
+    const err = new MyError("a message to you Rudy", "config/bar");
+    expect(err).toBeInstanceOf(BaseBrilliance);
+    console.log(JSON.stringify(err.structuredStack));
   });
-  it.todo("createLibraryError() produces correct error class and props");
-  it.todo("createServerlessError() produces correct error class and props");
+  it.todo("createError() with specified Type restricts typing of error classes classification");
+  it.todo("createError() with specified Type and SubType, classification further restricted");
+
+  it.todo("Error stack looks correct in basic calling structure");
+});
+
+describe("using HttpConstructor", () => {
+  it("createError() with no options produces flexible error class and props", () => {
+    type Type = "config" | "execution";
+    const MyError = createError<Type>("MyError", "MyApp");
+    const err = new MyError("a message to you Rudy", "config/bar");
+    expect(err).toBeInstanceOf(BaseBrilliance);
+    console.log(JSON.stringify(err.structuredStack));
+
+    // expect(isAppError(MyError)).toBeTruthy();
+  });
+  it.todo("createError() with specified Type restricts typing of error classes classification");
+  it.todo("createError() with specified Type and SubType, classification further restricted");
+
+  it.todo("Error stack looks correct in basic calling structure");
 });
 
 // const basics = suite("basic tests => ");

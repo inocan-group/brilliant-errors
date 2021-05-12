@@ -22,7 +22,8 @@
     "watch": "ttsc -P tsconfig.build.json -w"
   },
   "dependencies": {
-    "common-types": "^1.18.0"
+    "callsites": "^3.1.0",
+    "common-types": "^1.25.0"
   },
   "devDependencies": {
     "@ampproject/rollup-plugin-closure-compiler": "^0.26.0",
