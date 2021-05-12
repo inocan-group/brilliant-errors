@@ -1,23 +1,38 @@
 {
-  "ts-node": {
-    "transpileOnly": true,
-    "compilerOptions": {
-      "module": "commonjs"
-    },
-    "include": ["tests/**/*"]
-  },
   "compilerOptions": {
     "module": "commonjs",
-    "target": "esnext",
-    "lib": ["es2015.reflect", "DOM", "ES2017"],
+    "target": "ES2020",
     "moduleResolution": "node",
-    "strict": true,
-    "noEmit": true,
-    "outDir": "dist",
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
+
+    "sourceMap": true,
+    "incremental": true,
+    "resolveJsonModule": true,
     "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true
+
+    "strict": true,
+    "skipLibCheck": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "allowSyntheticDefaultImports": true,
+
+    "baseUrl": ".",
+    "declaration": true,
+    "declarationMap": true,
+    "outDir": "bin",
+
+    "paths": {
+      "~/*": ["src/*"],
+      "/~/*": ["src/*"]
+    },
+    "plugins": [
+      // Transform paths in output .js files
+      { "transform": "typescript-transform-paths" },
+
+      // Transform paths in output .d.ts files
+      // (Include this line if you output declarations files)
+      { "transform": "typescript-transform-paths", "afterDeclarations": true }
+    ]
   },
   "include": ["src", "test"]
 }
