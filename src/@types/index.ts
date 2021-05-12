@@ -2,20 +2,19 @@
 
 // #region autoindexed files
 
-// index last changed at: 1st Jan, 2021, 06:04 PM ( GMT-8 )
+// index last changed at: 5th May, 2021, 04:25 PM ( GMT-7 )
 // export: named; exclusions: index, private.
-// files: isApiGatewayError, isAppError, isBrilliantError, isLibraryError, isServerlessError.
+// files: BaseBrilliance, constructors, error-config, type-guards.
 
 // local file exports
-export * from "./isApiGatewayError";
-export * from "./isAppError";
-export * from "./isBrilliantError";
-export * from "./isLibraryError";
-export * from "./isServerlessError";
+export * from "./BaseBrilliance";
+export * from "./constructors";
+export * from "./error-config";
+export * from "./type-guards";
 
 // Note:
 // -----
-// This file was created by running: "do devops autoindex"; it assumes you have
+// This file was created by running: "dd devops autoindex"; it assumes you have
 // the 'do-devops' pkg installed as a dev dep.
 //
 // By default it assumes that exports are named exports but this can be changed by
