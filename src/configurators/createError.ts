@@ -1,4 +1,4 @@
-import { TypeSubtype } from "common-types";
+import { ConstructorFor, TypeSubtype } from "common-types";
 import {
   BaseBrilliance,
   MessageConstructor,
@@ -82,5 +82,5 @@ export function createError<
     }
   }
 
-  return BrilliantError;
+  return BrilliantError as ConstructorFor<BaseBrilliance<T, S, H, N, O>>;
 }
