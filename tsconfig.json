@@ -19,11 +19,10 @@
     "baseUrl": ".",
     "declaration": true,
     "declarationMap": true,
-    "outDir": "bin",
+    "outDir": "dist",
 
     "paths": {
-      "~/*": ["src/*"],
-      "/~/*": ["src/*"]
+      "~/*": ["src/*"]
     },
     "plugins": [
       // Transform paths in output .js files

@@ -1,86 +1,112 @@
-import { ConstructorFor, TypeSubtype } from "common-types";
+/* eslint-disable brace-style */
+import { TypeSubtype } from "common-types";
+import { TypeGuard } from "inferred-types";
+
 import {
-  BaseBrilliance,
-  MessageConstructor,
   IErrorConfigOptions,
-  IErrorRuntimeOptions,
+  IBrilliantError,
+  ErrorConstructorType,
+  BrilliantErrorTuple,
+  ConstructorFor,
+  ErrorTypes,
+  ErrorSubTypes,
+  ErrorHttpCodes,
+  ErrorOptions,
 } from "~/@types";
 import callsites, { CallSite } from "callsites";
-
-function prettyStack(s: CallSite[]) {
-  return s
-    .map((i) => {
-      const file = (i.getFileName() || "[file unknown]").split("/").slice(-2).join("/");
-      const func = i.getFunctionName() || i.getMethodName() || "unknown";
-      const line = i.getLineNumber();
-      return `\t- ${file}, ${func}()${line ? `, at line ${line}` : ""}`;
-    })
-    .join("\n");
-}
+import { isBrilliantError } from "~/@guards";
+import getConstructor from "./constructors";
 
 /**
- * An Error thrown by a application. A string based "code" for the error can be added to errors
- * when throwing but isn't strictly required.
+ * Create an error type and type guard using brilliant errors.
  */
-export function createError<
-  T extends string = string,
-  S extends string = string,
-  H extends number = number,
-  N extends string = string,
-  O extends string = string
->(name: N, origin: O, _options?: IErrorConfigOptions<S, T>): MessageConstructor<T, S, H, N, O> {
-  // CLASS DEFINITION
-  class BrilliantError extends BaseBrilliance<T, S, H, N, O> {
-    public readonly kind = "BrilliantError";
-    public readonly name!: N;
-    public readonly classification!: TypeSubtype<T, S>;
-    public readonly type!: T;
-    public readonly subType!: S;
-    public readonly origin!: O;
-    public readonly structuredStack!: CallSite[];
-    public readonly httpStatus!: H;
-    public readonly filename!: string | null;
-    public readonly fn!: string | null;
-    public readonly line!: number | null;
+export const createError =
+  <N extends string, A extends string>(name: N, app: A): ErrorTypes<N, A> =>
+  <T extends string>(...types: T[]): ErrorSubTypes<N, A, T> =>
+  <S extends string>(...subTypes: S[]): ErrorHttpCodes<N, A, T, S> =>
+  <H extends number>(...httpCodes: H[]): ErrorOptions<N, A, T, S, H> =>
+  <C extends ErrorConstructorType = "standard">(configOptions?: IErrorConfigOptions<T, S, C>) => {
+    const ErrorClass = class BrilliantError
+      extends Error
+      implements IBrilliantError<N, A, T, S, H, C>
+    {
+      public readonly kind = "BrilliantError";
+      public readonly name!: N;
+      public readonly classification!: TypeSubtype<T, S>;
+      public readonly code!: T;
+      public readonly subType!: S;
+      public readonly app!: A;
+      public readonly constructorType!: C;
+      public readonly structuredStack!: CallSite[];
+      public readonly httpStatus!: C extends "network" ? H : H | undefined;
+      public readonly filename!: string | null;
+      public readonly fn!: string | null;
+      public readonly line!: number | null;
 
-    public toJSON() {
-      return {
-        name: this.name,
-        message: this.message,
-        classification: this.classification,
-        origin: this.origin,
-        fn: this.fn,
-        line: this.line,
-        stack: this.structuredStack,
-      };
-    }
-
-    /**
-     * Simple Message and Classification signature
-     */
-    constructor(
-      message: string,
-      classification: TypeSubtype<T, S>,
-      options: IErrorRuntimeOptions<H> = {}
-    ) {
-      super(message);
-      this.name = name;
-      this.origin = origin;
-      this.classification = classification;
-      this.structuredStack = callsites().slice(1) || [];
-      this.filename = (this.structuredStack[0].getFileName() || "").split("/").slice(-2).join("/");
-      this.line = this.structuredStack[0].getLineNumber();
-      this.fn =
-        this.structuredStack[0].getMethodName() || this.structuredStack[0].getFunctionName();
-      this.message = `${message} [ ${this.classification} ]\n\n${prettyStack(
-        this.structuredStack
-      )}`;
-
-      if (options.httpStatusCode) {
-        this.httpStatus = options.httpStatusCode;
+      public toJSON() {
+        return {
+          app: this.app,
+          name: this.name,
+          message: this.message,
+          classification: this.classification,
+          httpStatus: this.httpStatus as H,
+          code: this.code as T,
+          subType: this.subType as S,
+          fn: this.fn,
+          line: this.line,
+        };
       }
-    }
-  }
 
-  return BrilliantError as ConstructorFor<BaseBrilliance<T, S, H, N, O>>;
-}
+      /**
+       * Simple Message and Classification signature
+       */
+      constructor(...params: any[]) {
+        // always start by calling Error contructor
+        super("");
+        // assign properties which are unaffected by API style
+        this.constructorType = (configOptions?.constructorType || "standard") as C;
+        this.name = name;
+        this.app = app;
+        this.structuredStack = callsites().slice(1) || [];
+        this.filename = (this.structuredStack[0].getFileName() || "")
+          .split("/")
+          .slice(-2)
+          .join("/");
+        this.line = this.structuredStack[0].getLineNumber();
+        this.fn =
+          this.structuredStack[0].getMethodName() || this.structuredStack[0].getFunctionName();
+
+        // now call into the appropriate constructor to do the rest
+        const c = getConstructor<N, A, T, S, H, C>(this, {
+          name,
+          app,
+          types,
+          subTypes,
+          httpCodes,
+          configOptions: configOptions || {},
+        });
+
+        const ctor = c[this.constructorType] as (...args: any[]) => void;
+        // let the particular API provided to user manipulate the state of this error
+        ctor(...params);
+      }
+    };
+
+    const SpecificGuard: TypeGuard<IBrilliantError<N, A, T, S, H, C>> = (
+      unknown: unknown
+    ): unknown is IBrilliantError<N, A, T, S, H, C> => {
+      return isBrilliantError(unknown) && unknown.name === name && unknown.app === app;
+    };
+
+    type Ctor = ConstructorFor<N, A, T, S, H, C>;
+
+    // return the error class, a specific type guard, and a general purpose type guard
+    return [ErrorClass as unknown as Ctor, SpecificGuard, isBrilliantError] as BrilliantErrorTuple<
+      N,
+      A,
+      T,
+      S,
+      H,
+      C
+    >;
+  };
