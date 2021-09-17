@@ -68,8 +68,9 @@ export interface IBrilliantError<
     message: string;
     classification: TypeSubtype<T, S>;
     httpStatus: H;
+    code: T;
+    subType: S;
     fn: string | null;
     line: number | null;
-    stack: CallSite[];
   };
 }

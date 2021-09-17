@@ -1,26 +1,52 @@
 import { TypeGuard } from "inferred-types";
 import { IBrilliantError } from "./IBriliantError";
 import { isBrilliantError } from "../@guards";
-import { StandardConstructor } from "~/configurators/constructors/standard";
-import { WrapperConstructor } from "~/configurators/constructors/wrapper";
-import { NetworkConstructor } from "~/configurators/constructors/network";
 import type { ConstructorFor } from "~/@types";
+import { TypeSubtype } from "common-types";
 
-export type ErrorConstructorType = "standard" | "network" | "wrapper";
-export type ErrorClass<
-  N extends string,
-  A extends string,
+/**
+ * The constructor when using a "network" error from Brilliant Errors
+ */
+export type NetworkConstructor<
   T extends string,
   S extends string,
   H extends number,
-  C extends ErrorConstructorType
-> = C extends "standard"
-  ? StandardConstructor<N, A, T, S, H, C>
-  : C extends "wrapper"
-  ? WrapperConstructor<T, S, H>
-  : C extends "network"
-  ? NetworkConstructor<T, S, H>
-  : never;
+  R extends any = void
+> = (
+  code: H,
+  message: string,
+  options?: {
+    classification?: TypeSubtype<T, S>;
+  }
+) => R;
+
+export type WrapperConstructor<
+  T extends string,
+  S extends string,
+  H extends number,
+  R extends any = void
+> = (
+  underlying: Error,
+  classification: TypeSubtype<T, S>,
+  options?: {
+    message?: string;
+    httpErrorCode?: H;
+  }
+) => R;
+
+export type StandardConstructor<
+  T extends string,
+  S extends string,
+  H extends number,
+  R extends any = void
+> = (
+  message: string,
+  classification: TypeSubtype<T, S>,
+  // eslint-disable-next-line no-use-before-define
+  options?: IErrorRuntimeOptions<H> | undefined
+) => R;
+
+export type ErrorConstructorType = "standard" | "network" | "wrapper";
 
 /** configuration options when setting up an Error class */
 export type IErrorConfigOptions<

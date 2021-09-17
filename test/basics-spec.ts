@@ -100,9 +100,14 @@ describe("using MessageContructor", () => {
       defaultHttpStatus: 500,
     });
 
-    const err = new MyError("this is a test", "major/minor");
+    const err = new MyError("this is a test", "hey/wazzup");
 
     expect(err.httpStatus).toBe(500);
-    expect(err.code).toBe("major");
+    expect(err.code).toBe("hey");
+    expect(err.subType).toBe("wazzup");
+    expect(err.classification).toBe("hey/wazzup");
+
+    expect(isMyError(err)).toBeTruthy();
+    expect(isMyError(new Error("not today"))).toBeFalsy();
   });
 });

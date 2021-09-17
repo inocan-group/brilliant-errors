@@ -1,11 +1,11 @@
-import { ErrorConstructorType, IErrorConfigOptions } from "./error-config";
-import { Constructor } from "./general";
-import { IBrilliantError } from ".";
-import standard from "~/configurators/constructors/standard";
-import wrapper from "~/configurators/constructors/wrapper";
-import network from "~/configurators/constructors/network";
+import {
+  ErrorConstructorType,
+  IErrorConfigOptions,
+  NetworkConstructor,
+  WrapperConstructor,
+} from "./error-config";
 
-const c = { standard, wrapper, network };
+import { Constructor, IBrilliantError, StandardConstructor } from ".";
 
 export type IConstructorProps<
   N extends string,
@@ -30,9 +30,9 @@ export type ConstructorFor<
   H extends number,
   C extends ErrorConstructorType
 > = C extends "standard"
-  ? Constructor<Parameters<ReturnType<typeof c.standard>>, IBrilliantError<N, A, T, S, H, C>>
+  ? Constructor<Parameters<StandardConstructor<T, S, H>>, IBrilliantError<N, A, T, S, H, C>>
   : C extends "network"
-  ? Constructor<Parameters<ReturnType<typeof c.network>>, IBrilliantError<N, A, T, S, H, C>>
+  ? Constructor<Parameters<NetworkConstructor<T, S, H>>, IBrilliantError<N, A, T, S, H, C>>
   : C extends "wrapper"
-  ? Constructor<Parameters<ReturnType<typeof c.wrapper>>, IBrilliantError<N, A, T, S, H, C>>
+  ? Constructor<Parameters<WrapperConstructor<T, S, H>>, IBrilliantError<N, A, T, S, H, C>>
   : never;

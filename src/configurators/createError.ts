@@ -6,7 +6,6 @@ import {
   IErrorConfigOptions,
   IBrilliantError,
   ErrorConstructorType,
-  IfNotThen,
   BrilliantErrorTuple,
   ConstructorFor,
   ErrorTypes,
@@ -27,12 +26,9 @@ export const createError =
   <S extends string>(...subTypes: S[]): ErrorHttpCodes<N, A, T, S> =>
   <H extends number>(...httpCodes: H[]): ErrorOptions<N, A, T, S, H> =>
   <C extends ErrorConstructorType = "standard">(configOptions?: IErrorConfigOptions<T, S, C>) => {
-    /** The constructor type, regardless if user explicitly stated it */
-    type CC = C extends ErrorConstructorType ? C : "standard";
-
     const ErrorClass = class BrilliantError
       extends Error
-      implements IBrilliantError<N, A, T, S, H, CC>
+      implements IBrilliantError<N, A, T, S, H, C>
     {
       public readonly kind = "BrilliantError";
       public readonly name!: N;
@@ -40,9 +36,9 @@ export const createError =
       public readonly code!: T;
       public readonly subType!: S;
       public readonly app!: A;
-      public readonly constructorType!: CC;
+      public readonly constructorType!: C;
       public readonly structuredStack!: CallSite[];
-      public readonly httpStatus!: CC extends "network" ? H : H | undefined;
+      public readonly httpStatus!: C extends "network" ? H : H | undefined;
       public readonly filename!: string | null;
       public readonly fn!: string | null;
       public readonly line!: number | null;
@@ -54,6 +50,8 @@ export const createError =
           message: this.message,
           classification: this.classification,
           httpStatus: this.httpStatus as H,
+          code: this.code as T,
+          subType: this.subType as S,
           fn: this.fn,
           line: this.line,
         };
@@ -66,7 +64,7 @@ export const createError =
         // always start by calling Error contructor
         super("");
         // assign properties which are unaffected by API style
-        this.constructorType = (configOptions?.constructorType || "standard") as CC;
+        this.constructorType = (configOptions?.constructorType || "standard") as C;
         this.name = name;
         this.app = app;
         this.structuredStack = callsites().slice(1) || [];
@@ -79,7 +77,7 @@ export const createError =
           this.structuredStack[0].getMethodName() || this.structuredStack[0].getFunctionName();
 
         // now call into the appropriate constructor to do the rest
-        const c = getConstructor<N, A, T, S, H, CC>(this, {
+        const c = getConstructor<N, A, T, S, H, C>(this, {
           name,
           app,
           types,
@@ -88,29 +86,19 @@ export const createError =
           configOptions: configOptions || {},
         });
 
-        const ctor = c[this.constructorType];
-        type P = Parameters<typeof ctor>;
-        // let the particular manipulate the state of this error
-        ctor(...(params as P));
+        const ctor = c[this.constructorType] as (...args: any[]) => void;
+        // let the particular API provided to user manipulate the state of this error
+        ctor(...params);
       }
     };
 
-    const SpecificGuard: TypeGuard<
-      IBrilliantError<N, A, T, S, H, IfNotThen<C, ErrorConstructorType, "standard">>
-    > = (
+    const SpecificGuard: TypeGuard<IBrilliantError<N, A, T, S, H, C>> = (
       unknown: unknown
-    ): unknown is IBrilliantError<
-      N,
-      A,
-      T,
-      S,
-      H,
-      IfNotThen<C, ErrorConstructorType, "standard">
-    > => {
+    ): unknown is IBrilliantError<N, A, T, S, H, C> => {
       return isBrilliantError(unknown) && unknown.name === name && unknown.app === app;
     };
 
-    type Ctor = ConstructorFor<N, A, T, S, H, CC>;
+    type Ctor = ConstructorFor<N, A, T, S, H, C>;
 
     // return the error class, a specific type guard, and a general purpose type guard
     return [ErrorClass as unknown as Ctor, SpecificGuard, isBrilliantError] as BrilliantErrorTuple<
@@ -119,6 +107,6 @@ export const createError =
       T,
       S,
       H,
-      CC
+      C
     >;
   };

@@ -1,14 +1,11 @@
 import { TypeSubtype } from "common-types";
-import { ErrorConstructorType, IBrilliantError, IConstructorProps } from "~/@types";
+import {
+  ErrorConstructorType,
+  IBrilliantError,
+  IConstructorProps,
+  NetworkConstructor,
+} from "~/@types";
 import { prettyStack } from "~/shared";
-
-export type NetworkConstructor<T extends string, S extends string, H extends number> = (
-  code: H,
-  message: string,
-  options?: {
-    classification?: TypeSubtype<T, S>;
-  }
-) => void;
 
 export default <
     N extends string,
@@ -20,7 +17,7 @@ export default <
   >(
     ctx: IBrilliantError<N, A, T, S, H, C>,
     props: IConstructorProps<N, A, T, S, H>
-  ): NetworkConstructor<T, S, Exclude<H, undefined>> =>
+  ): NetworkConstructor<T, S, H> =>
   (code, message, options) => {
     ctx.httpStatus = code;
 

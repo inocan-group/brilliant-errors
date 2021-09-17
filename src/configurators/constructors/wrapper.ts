@@ -1,15 +1,10 @@
-import { TypeSubtype } from "common-types";
-import { ErrorConstructorType, IBrilliantError, IConstructorProps } from "~/@types";
+import {
+  ErrorConstructorType,
+  IBrilliantError,
+  IConstructorProps,
+  WrapperConstructor,
+} from "~/@types";
 import { prettyStack } from "~/shared";
-
-export type WrapperConstructor<T extends string, S extends string, H extends number> = (
-  underlying: Error,
-  classification: TypeSubtype<T, S>,
-  options?: {
-    message?: string;
-    httpErrorCode?: H;
-  }
-) => void;
 
 export default <
     N extends string,
@@ -21,7 +16,7 @@ export default <
   >(
     ctx: IBrilliantError<N, A, T, S, H, C>,
     _props: IConstructorProps<N, A, T, S, H>
-  ): WrapperConstructor<T, S, Exclude<H, undefined>> =>
+  ): WrapperConstructor<T, S, H> =>
   (underlying, classification, options) => {
     ctx.classification = classification;
     if (options?.httpErrorCode) {

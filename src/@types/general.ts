@@ -1,5 +1,3 @@
-import { ErrorConstructorType } from ".";
-
 /**
  * Provides a default type if `T` is undefined
  */
