@@ -1,9 +1,9 @@
-// #autoindex
+// #autoindex, exclude: constructors
 
 // #region autoindexed files
 
-// index last changed at: 5th May, 2021, 03:59 PM ( GMT-7 )
-// export: named; exclusions: index, private.
+// index last changed at: 9th Sep, 2021, 05:08 PM ( GMT-7 )
+// export: named; exclusions: constructors, index, private.
 // files: createError.
 
 // local file exports

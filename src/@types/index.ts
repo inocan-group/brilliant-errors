@@ -2,15 +2,16 @@
 
 // #region autoindexed files
 
-// index last changed at: 5th May, 2021, 04:25 PM ( GMT-7 )
+// index last changed at: 9th Sep, 2021, 02:52 PM ( GMT-7 )
 // export: named; exclusions: index, private.
-// files: BaseBrilliance, constructors, error-config, type-guards.
+// files: BaseBrilliance, IBriliantError, constructors, error-config, general.
 
 // local file exports
 export * from "./BaseBrilliance";
+export * from "./IBriliantError";
 export * from "./constructors";
 export * from "./error-config";
-export * from "./type-guards";
+export * from "./general";
 
 // Note:
 // -----

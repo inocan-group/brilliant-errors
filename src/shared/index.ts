@@ -4,13 +4,10 @@
 
 // index last changed at: 9th Sep, 2021, 03:12 PM ( GMT-7 )
 // export: named; exclusions: index, private.
-// directories: @guards, @types, configurators, shared.
+// files: prettyStack.
 
-// directory exports
-export * from "./@guards/index";
-export * from "./@types/index";
-export * from "./configurators/index";
-export * from "./shared/index";
+// local file exports
+export * from "./prettyStack";
 
 // Note:
 // -----
