@@ -1,6 +1,6 @@
 import { TypeGuard } from "inferred-types";
 import { IBrilliantError } from "./IBriliantError";
-import { isBrilliantError } from "../@guards";
+import { BrillianErrorTypeGuard } from "../@guards";
 import type { ConstructorFor } from "~/@types";
 import { TypeSubtype } from "common-types";
 
@@ -75,7 +75,7 @@ export type BrilliantErrorTuple<
 > = [
   ConstructorFor<N, A, T, S, H, C>,
   TypeGuard<IBrilliantError<N, A, T, S, H, C>>,
-  typeof isBrilliantError
+  BrillianErrorTypeGuard
 ];
 
 /**
@@ -92,8 +92,12 @@ export type ErrorOptions<
 ) => BrilliantErrorTuple<N, A, T, S, H, C>;
 
 /** enter the numeric error codes that this error can throw; leaving it empty will allow all numeric codes */
-export type ErrorHttpCodes<N extends string, A extends string, T extends string, S extends string> =
-  <H extends number>(...httpCodes: H[]) => ErrorOptions<N, A, T, S, H>;
+export type ErrorHttpCodes<
+  N extends string,
+  A extends string,
+  T extends string,
+  S extends string
+> = <H extends number>(...httpCodes: H[]) => ErrorOptions<N, A, T, S, H>;
 
 export type ErrorSubTypes<N extends string, A extends string, T extends string> = <
   S extends string
