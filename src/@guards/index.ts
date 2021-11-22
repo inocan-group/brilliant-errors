@@ -6,3 +6,5 @@ export function isBrilliantError(
 ): error is IBrilliantError<any, any, any, any, any, any> {
   return error instanceof Error && (error as IDictionary).kind === "BrilliantError";
 }
+
+export type BrillianErrorTypeGuard = typeof isBrilliantError;

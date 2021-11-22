@@ -1,6 +1,6 @@
 {
   "name": "brilliant-errors",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "A set of configurators to help your Apps and Libraries build brilliant error classes",
   "main": "dist/cjs/index.js",
   "module": "dist/es/index.js",
@@ -26,7 +26,7 @@
   "peerDependencies": {
     "callsites": "^3.1.0",
     "common-types": "^1.29.0",
-    "inferred-types": "^0.16.1"
+    "inferred-types": "^0.17.0"
   },
   "devDependencies": {
     "@ampproject/rollup-plugin-closure-compiler": "^0.27.0",
@@ -54,7 +54,7 @@
     "rollup": "^2.47.0",
     "rollup-plugin-analyzer": "^4.0.0",
     "rollup-plugin-terser": "^7.0.2",
-    "rollup-plugin-typescript2": "^0.30.0",
+    "rollup-plugin-typescript2": "^0.31.0",
     "ts-jest": "^27.0.5",
     "ts-node": "^10.2.1",
     "ts-patch": "^1.4.4",
