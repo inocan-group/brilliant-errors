@@ -1,10 +1,10 @@
 {
   "name": "brilliant-errors",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "A set of configurators to help your Apps and Libraries build brilliant error classes",
   "main": "dist/cjs/index.js",
   "module": "dist/es/index.js",
-  "typings": "dist/typings/index.js",
+  "typings": "dist/typings/index.d.js",
   "files": [
     "dist"
   ],
