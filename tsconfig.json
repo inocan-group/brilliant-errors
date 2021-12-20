@@ -8,6 +8,7 @@
     "incremental": true,
     "resolveJsonModule": true,
     "esModuleInterop": true,
+    "tsBuildInfoFile": ".tsbuildinfo",
 
     "strict": true,
     "skipLibCheck": true,
