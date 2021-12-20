@@ -2,27 +2,27 @@ lockfileVersion: 5.3
 
 specifiers:
   '@type-challenges/utils': ^0.1.1
-  '@types/jest': ^27.0.1
-  '@typescript-eslint/eslint-plugin': ^5.1.0
-  '@typescript-eslint/parser': ^5.1.0
+  '@types/jest': ^27.0.3
+  '@typescript-eslint/eslint-plugin': ^5.8.0
+  '@typescript-eslint/parser': ^5.8.0
   callsites: ^3.1.0
-  common-types: ^1.29.0
+  common-types: ^1.31.0
   dd: ^0.15.6
-  eslint: ^8.0.1
+  eslint: ^8.5.0
   eslint-config-prettier: ^8.3.0
-  eslint-plugin-import: ^2.22.1
+  eslint-plugin-import: ^2.25.3
   eslint-plugin-prettier: ^4.0.0
-  eslint-plugin-promise: ^5.1.0
-  eslint-plugin-unicorn: ^37.0.1
-  jest: ^27.2.0
-  jest-extended: ^1.1.0
+  eslint-plugin-promise: ^6.0.0
+  eslint-plugin-unicorn: ^39.0.0
+  jest: ^27.4.5
+  jest-extended: ^1.2.0
   npm-run-all: ^4.1.5
-  prettier: ^2.2.1
+  prettier: ^2.5.1
   rimraf: ^3.0.2
-  ts-jest: ^27.0.5
-  ts-node: ^10.2.1
+  ts-jest: ^27.1.2
+  ts-node: ^10.4.0
   tsup: ^5.11.6
-  typescript: ^4.4.4
+  typescript: ^4.5.4
 
 devDependencies:
   '@type-challenges/utils': 0.1.1
@@ -36,8 +36,8 @@ devDependencies:
   eslint-config-prettier: 8.3.0_eslint@8.5.0
   eslint-plugin-import: 2.25.3_eslint@8.5.0
   eslint-plugin-prettier: 4.0.0_94e1b6d3ce6ea916847122712570e9ae
-  eslint-plugin-promise: 5.2.0_eslint@8.5.0
-  eslint-plugin-unicorn: 37.0.1_eslint@8.5.0
+  eslint-plugin-promise: 6.0.0_eslint@8.5.0
+  eslint-plugin-unicorn: 39.0.0_eslint@8.5.0
   jest: 27.4.5_ts-node@10.4.0
   jest-extended: 1.2.0
   npm-run-all: 4.1.5
@@ -1770,7 +1770,7 @@ packages:
       inquirer: 8.2.0
       js-yaml: 4.1.0
       matcher: 4.0.0
-      native-dash: 1.21.0_callsites@3.1.0
+      native-dash: 1.21.1_callsites@3.1.0
       play-sound: 1.1.3
       pnpm: 6.24.2
       recast: 0.20.5
@@ -2251,17 +2251,17 @@ packages:
       prettier-linter-helpers: 1.0.0
     dev: true
 
-  /eslint-plugin-promise/5.2.0_eslint@8.5.0:
-    resolution: {integrity: sha512-SftLb1pUG01QYq2A/hGAWfDRXqYD82zE7j7TopDOyNdU+7SvvoXREls/+PRTY17vUXzXnZA/zfnyKgRH6x4JJw==}
-    engines: {node: ^10.12.0 || >=12.0.0}
+  /eslint-plugin-promise/6.0.0_eslint@8.5.0:
+    resolution: {integrity: sha512-7GPezalm5Bfi/E22PnQxDWH2iW9GTvAlUNTztemeHb6c1BniSyoeTrM87JkC0wYdi6aQrZX9p2qEiAno8aTcbw==}
+    engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
-      eslint: ^7.0.0
+      eslint: ^7.0.0 || ^8.0.0
     dependencies:
       eslint: 8.5.0
     dev: true
 
-  /eslint-plugin-unicorn/37.0.1_eslint@8.5.0:
-    resolution: {integrity: sha512-E1jq5u9ojnadisJcPi+hMXTGSiIzkIUMDvWsBudsCGXvKUB2aNSU2TcfyW2/jAS5A4ryBXfzxLykMxX1EdluSQ==}
+  /eslint-plugin-unicorn/39.0.0_eslint@8.5.0:
+    resolution: {integrity: sha512-fd5RK2FtYjGcIx3wra7csIE/wkkmBo22T1gZtRTsLr1Mb+KsFKJ+JOdSqhHXQUrI/JTs/Mon64cEYzTgSCbltw==}
     engines: {node: '>=12'}
     peerDependencies:
       eslint: '>=7.32.0'
@@ -2935,7 +2935,7 @@ packages:
     resolution: {integrity: sha512-yLOmuT2UeycEom5aP1/dmb7GwNOTQ+senxVSd7vlXPKXHoXWe6b12fmNdvftDd293oR/BpZ8YBmZ8Xk04b+s1A==}
     dependencies:
       brilliant-errors: 0.4.3_20d24a6661ded2cee08f9ae714a3d23b
-      native-dash: 1.21.0_callsites@3.1.0
+      native-dash: 1.21.1_callsites@3.1.0
     optionalDependencies:
       common-types: 1.31.0
     transitivePeerDependencies:
@@ -4111,8 +4111,8 @@ packages:
     resolution: {integrity: sha512-ONmRUqK7zj7DWX0D9ADe03wbwOBZxNAfF20PlGfCWQcD3+/MakShIHrMqx9YwPTfxDdF1zLeL+RGZiR9kGMLdg==}
     dev: true
 
-  /native-dash/1.21.0_callsites@3.1.0:
-    resolution: {integrity: sha512-xDqHBfvbTAwgKU2fTIHBU2S8f7jnYAckVxSagtuJ/1qFM+I/8QKuxJkEBFrd9womNvQhV+3t2pYaO4GDjiMzKg==}
+  /native-dash/1.21.1_callsites@3.1.0:
+    resolution: {integrity: sha512-55cCX27FbbzNrEu9M/YKAwuHi5VBWiOy07lcz9/3cBsjy40CZQ9oXvldPREMUwcqYvahMClPb6eozj+ao/Pm0A==}
     optionalDependencies:
       inferred-types: 0.18.0_callsites@3.1.0
     transitivePeerDependencies:
