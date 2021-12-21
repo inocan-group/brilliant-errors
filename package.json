@@ -1,6 +1,6 @@
 {
   "name": "brilliant-errors",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "A set of configurators to help your Apps and Libraries build brilliant error classes",
   "keywords": [
     "error-management"
@@ -15,9 +15,15 @@
   },
   "license": "MIT",
   "author": "Ken Snyder <ken@ken.net>",
-  "main": "index.js",
-  "module": "index.mjs",
-  "typings": "dist/index.d.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "typings": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
   "files": [
     "dist"
   ],
