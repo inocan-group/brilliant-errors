@@ -1,6 +1,6 @@
 {
   "name": "brilliant-errors",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "A set of configurators to help your Apps and Libraries build brilliant error classes",
   "keywords": [
     "error-management"
@@ -38,7 +38,9 @@
     "lint:test": "eslint test/**/*.ts",
     "lint:tsc": "tsc --noEmit",
     "test": "jest",
-    "watch": "npx tsup src/index.ts --format='esm,cjs' --dts --watch"
+    "watch": "run-p watch:*",
+    "watch:ai": "npx dd autoindex --watch",
+    "watch:tsup": "npx tsup src/index.ts --format='esm,cjs' --dts --watch"
   },
   "devDependencies": {
     "@type-challenges/utils": "^0.1.1",
@@ -47,7 +49,7 @@
     "@typescript-eslint/parser": "^5.8.0",
     "callsites": "^3.1.0",
     "common-types": "^1.31.0",
-    "dd": "^0.15.6",
+    "dd": "^0.16.1",
     "eslint": "^8.5.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.3",
@@ -61,7 +63,7 @@
     "rimraf": "^3.0.2",
     "ts-jest": "^27.1.2",
     "ts-node": "^10.4.0",
-    "tsup": "^5.11.6",
+    "tsup": "^5.11.9",
     "typescript": "^4.5.4"
   },
   "peerDependencies": {

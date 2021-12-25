@@ -1,6 +1,4 @@
 /* eslint-disable brace-style */
-import { TypeSubtype } from "common-types";
-import { TypeGuard } from "inferred-types";
 
 import {
   IErrorConfigOptions,
@@ -12,6 +10,8 @@ import {
   ErrorSubTypes,
   ErrorHttpCodes,
   ErrorOptions,
+  TypeSubtype,
+  TypeGuard,
 } from "~/@types";
 import callsites, { CallSite } from "callsites";
 import { isBrilliantError } from "~/@guards";
@@ -25,7 +25,9 @@ export const createError =
   <T extends string>(...types: T[]): ErrorSubTypes<N, A, T> =>
   <S extends string>(...subTypes: S[]): ErrorHttpCodes<N, A, T, S> =>
   <H extends number>(...httpCodes: H[]): ErrorOptions<N, A, T, S, H> =>
-  <C extends ErrorConstructorType = "standard">(configOptions?: IErrorConfigOptions<T, S, C>) => {
+  <C extends ErrorConstructorType = "standard">(
+    configOptions?: IErrorConfigOptions<T, S, C>
+  ): BrilliantErrorTuple<N, A, T, S, H, C> => {
     const ErrorClass = class BrilliantError
       extends Error
       implements IBrilliantError<N, A, T, S, H, C>
