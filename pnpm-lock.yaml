@@ -3,18 +3,19 @@ lockfileVersion: 5.3
 specifiers:
   '@type-challenges/utils': ^0.1.1
   '@types/jest': ^27.0.3
+  '@types/node': '14'
   '@typescript-eslint/eslint-plugin': ^5.8.0
   '@typescript-eslint/parser': ^5.8.0
   callsites: ^3.1.0
-  common-types: ^1.29.0
-  dd: ^0.16.3
+  common-types: ^1.31.0
+  dd: ^0.16.10
   eslint: ^8.5.0
   eslint-config-prettier: ^8.3.0
   eslint-plugin-import: ^2.25.3
   eslint-plugin-prettier: ^4.0.0
   eslint-plugin-promise: ^6.0.0
   eslint-plugin-unicorn: ^39.0.0
-  inferred-types: ^0.18.0
+  inferred-types: ^0.18.3
   jest: ^27.4.5
   jest-extended: ^1.2.0
   npm-run-all: ^4.1.5
@@ -28,14 +29,15 @@ specifiers:
 dependencies:
   callsites: 3.1.0
   common-types: 1.31.0
-  inferred-types: 0.18.0_callsites@3.1.0
+  inferred-types: 0.18.3
 
 devDependencies:
   '@type-challenges/utils': 0.1.1
   '@types/jest': 27.0.3
+  '@types/node': 14.18.3
   '@typescript-eslint/eslint-plugin': 5.8.0_836011a006f4f5d67178564baf2b6d34
   '@typescript-eslint/parser': 5.8.0_eslint@8.5.0+typescript@4.5.4
-  dd: 0.16.3
+  dd: 0.16.10_typescript@4.5.4
   eslint: 8.5.0
   eslint-config-prettier: 8.3.0_eslint@8.5.0
   eslint-plugin-import: 2.25.3_eslint@8.5.0
@@ -48,7 +50,7 @@ devDependencies:
   prettier: 2.5.1
   rimraf: 3.0.2
   ts-jest: 27.1.2_b65cae1b46840061996b6cc0ea16ca56
-  ts-node: 10.4.0_typescript@4.5.4
+  ts-node: 10.4.0_60e8b8d4e7c9a6973679cdf61ab01fe0
   tsup: 5.11.9_ts-node@10.4.0+typescript@4.5.4
   typescript: 4.5.4
 
@@ -809,6 +811,10 @@ packages:
     resolution: {integrity: sha512-Klz949h02Gz2uZCMGwDUSDS1YBlTdDDgbWHi+81l29tQALUtvz4rAYi5uoVhE5Lagoq6DeqAUlbrHvW/mXDgdQ==}
     dev: true
 
+  /@types/node/14.18.3:
+    resolution: {integrity: sha512-GtTH2crF4MtOIrrAa+jgTV9JX/PfoUCYr6MiZw7O/dkZu5b6gm5dc1nAL0jwGo4ortSBBtGyeVaxdC8X6V+pLg==}
+    dev: true
+
   /@types/node/17.0.4:
     resolution: {integrity: sha512-6xwbrW4JJiJLgF+zNypN5wr2ykM9/jHcL7rQ8fZe2vuftggjzZeRSM4OwRc6Xk8qWjwJ99qVHo/JgOGmomWRog==}
     dev: true
@@ -1392,18 +1398,6 @@ packages:
     engines: {node: '>=12.0.0'}
     dev: true
 
-  /brilliant-errors/0.4.3_20d24a6661ded2cee08f9ae714a3d23b:
-    resolution: {integrity: sha512-bDgIn5JFahgb7AEOIQjw4IhD6J2EEBd3Q+36+dymWk9Wsyyxirs9M8ArU758SLJnrCIAcEdmtaO7q56bNnnZeA==}
-    engines: {node: '>=12.0.0'}
-    peerDependencies:
-      callsites: ^3.1.0
-      common-types: ^1.29.0
-      inferred-types: ^0.17.0
-    dependencies:
-      callsites: 3.1.0
-      common-types: 1.31.0
-      inferred-types: 0.18.0_callsites@3.1.0
-
   /browser-process-hrtime/1.0.0:
     resolution: {integrity: sha512-9o5UecI3GhkpM6DrXr69PblIuWxPKk9Y0jHBRhdocZ2y7YECBFCsHm79Pr3OyR2AvjhDkabFJaDJMYRazHgsow==}
     dev: true
@@ -1798,8 +1792,8 @@ packages:
     engines: {node: '>=0.11'}
     dev: true
 
-  /dd/0.16.3:
-    resolution: {integrity: sha512-o+glgXAGCDJ+CWcp1Bj3wSil8FxTh9K7CNIhRoz4jLlXqDJHWmgnXiEVoWSFNRLheyMZrRwvRjSUgZnVAhON3Q==}
+  /dd/0.16.10_typescript@4.5.4:
+    resolution: {integrity: sha512-cWHlr/YzHvfRP8W95hGMY5zFOKCB6stNjRWWGlGb55fm96SIlDumlKSaoL/QYdeMQvGGjsn5s+9KNe0B9Az9EA==}
     hasBin: true
     dependencies:
       ast-types: 0.14.2
@@ -1817,27 +1811,31 @@ packages:
       deepmerge: 4.2.2
       destr: 1.1.0
       diff: 5.0.0
-      exiftool-vendored: 15.8.0
+      exiftool-vendored: 15.9.1
       find-up: 5.0.0
       globby: 11.0.4
-      inferred-types: 0.18.0_callsites@3.1.0
+      inferred-types: 0.18.3
       inquirer: 8.2.0
       js-yaml: 4.1.0
       madge: 5.0.1
       matcher: 4.0.0
-      native-dash: 1.21.1_callsites@3.1.0
+      native-dash: 1.21.3
       play-sound: 1.1.3
       pnpm: 6.24.3
       recast: 0.20.5
       sharp: 0.29.3
+      shelljs: 0.8.4
       simple-git: 2.48.0
       smartwrap: 2.0.2
       table: 6.7.5
       ts-morph: 13.0.2
+      ts-patch: 2.0.1_typescript@4.5.4
       typed-mapper: 0.4.1
+      typescript-transform-paths: 3.3.1_typescript@4.5.4
       xxhash: 0.3.0
     transitivePeerDependencies:
       - supports-color
+      - typescript
     dev: true
 
   /debug/2.6.9:
@@ -2655,8 +2653,8 @@ packages:
     dev: true
     optional: true
 
-  /exiftool-vendored/15.8.0:
-    resolution: {integrity: sha512-9gPyBkIxOOfsFjIU4bODX7RJ2HyxY63DtaK6BwLOVd3/xIgsXY98mqh3MGSnSrZeuCnq3SYiWsI0jQ9ArpBkdQ==}
+  /exiftool-vendored/15.9.1:
+    resolution: {integrity: sha512-frlW4DCJ3iLyPFvnSkJK4zYEJoa4Ax+ASkBV99EZwUe4Q9NLeJKbaAfNgN2nrXpqweoq10YlPfpvEislAHoeLw==}
     dependencies:
       batch-cluster: 8.0.1
       he: 1.2.0
@@ -2982,6 +2980,15 @@ packages:
       path-is-absolute: 1.0.1
     dev: true
 
+  /global-prefix/3.0.0:
+    resolution: {integrity: sha512-awConJSVCHVGND6x3tmMaKcQvwXLhjdkmomy2W+Goaui8YPgYgXJZewhg3fWC+DlfqqQuWg8AwqjGTD2nAPVWg==}
+    engines: {node: '>=6'}
+    dependencies:
+      ini: 1.3.8
+      kind-of: 6.0.3
+      which: 1.3.1
+    dev: true
+
   /globals/11.12.0:
     resolution: {integrity: sha512-WOBp/EEGUiIsJSp7wcv/y6MO+lV9UoncWqxuFfm8eBwzWNgyfBd6Gz+IeKQ9jCmyhoH99g15M3T+QaVHFjizVA==}
     engines: {node: '>=4'}
@@ -3182,15 +3189,10 @@ packages:
     resolution: {integrity: sha1-8w9xbI4r00bHtn0985FVZqfAVgc=}
     dev: true
 
-  /inferred-types/0.18.0_callsites@3.1.0:
-    resolution: {integrity: sha512-yLOmuT2UeycEom5aP1/dmb7GwNOTQ+senxVSd7vlXPKXHoXWe6b12fmNdvftDd293oR/BpZ8YBmZ8Xk04b+s1A==}
+  /inferred-types/0.18.3:
+    resolution: {integrity: sha512-iCyakuP+PoNQ9fU/LBe8X38Ojq80sYO2bg5fQJqTCvtqA2ay1DlGH3CfSQYbwkYQzxEkILERgOZJIGQ/LevMog==}
     dependencies:
-      brilliant-errors: 0.4.3_20d24a6661ded2cee08f9ae714a3d23b
-      native-dash: 1.21.1_callsites@3.1.0
-    optionalDependencies:
       common-types: 1.31.0
-    transitivePeerDependencies:
-      - callsites
 
   /inflight/1.0.6:
     resolution: {integrity: sha1-Sb1jMdfQLQwJvJEKEHW6gWW1bfk=}
@@ -3582,7 +3584,7 @@ packages:
       micromatch: 4.0.4
       pretty-format: 27.4.2
       slash: 3.0.0
-      ts-node: 10.4.0_typescript@4.5.4
+      ts-node: 10.4.0_60e8b8d4e7c9a6973679cdf61ab01fe0
     transitivePeerDependencies:
       - bufferutil
       - canvas
@@ -4125,6 +4127,11 @@ packages:
       minimist: 1.2.5
     dev: true
 
+  /kind-of/6.0.3:
+    resolution: {integrity: sha512-dcS1ul+9tmeD95T+x28/ehLgd9mENa3LsvDTtzm3vyBEO7RPptvAD+t44WVXaUjTBRcrpFeFlC8WCruUR456hw==}
+    engines: {node: '>=0.10.0'}
+    dev: true
+
   /kleur/3.0.3:
     resolution: {integrity: sha512-eTIzlVOSUR+JxdDFepEYcBMtZ9Qqdef+rnzWdRZuMbOywu5tO2w2N7rqjoANZ5k9vywhL6Br1VRjUIgTQx4E8w==}
     engines: {node: '>=6'}
@@ -4448,12 +4455,11 @@ packages:
     resolution: {integrity: sha512-ONmRUqK7zj7DWX0D9ADe03wbwOBZxNAfF20PlGfCWQcD3+/MakShIHrMqx9YwPTfxDdF1zLeL+RGZiR9kGMLdg==}
     dev: true
 
-  /native-dash/1.21.1_callsites@3.1.0:
-    resolution: {integrity: sha512-55cCX27FbbzNrEu9M/YKAwuHi5VBWiOy07lcz9/3cBsjy40CZQ9oXvldPREMUwcqYvahMClPb6eozj+ao/Pm0A==}
-    optionalDependencies:
-      inferred-types: 0.18.0_callsites@3.1.0
-    transitivePeerDependencies:
-      - callsites
+  /native-dash/1.21.3:
+    resolution: {integrity: sha512-GWdpGoNjlRjdQhykWXsWKK5Gc7eXPg3P1Ly7TF3O92uK3iZYzNA4hbpHn1vsyz4DZcXTy5K1LGH42Vi6TcvJMQ==}
+    dependencies:
+      inferred-types: 0.18.3
+    dev: true
 
   /natural-compare/1.4.0:
     resolution: {integrity: sha1-Sr6/7tdUHywnrPspvbvRXI1bpPc=}
@@ -4832,7 +4838,7 @@ packages:
     dependencies:
       import-cwd: 3.0.0
       lilconfig: 2.0.4
-      ts-node: 10.4.0_typescript@4.5.4
+      ts-node: 10.4.0_60e8b8d4e7c9a6973679cdf61ab01fe0
       yaml: 1.10.2
     dev: true
 
@@ -5828,7 +5834,7 @@ packages:
       code-block-writer: 11.0.0
     dev: true
 
-  /ts-node/10.4.0_typescript@4.5.4:
+  /ts-node/10.4.0_60e8b8d4e7c9a6973679cdf61ab01fe0:
     resolution: {integrity: sha512-g0FlPvvCXSIO1JDF6S232P5jPYqBkRL9qly81ZgAOSU7rwI0stphCgd2kLiCrU9DjQCrJMWEqcNSjQL02s6d8A==}
     hasBin: true
     peerDependencies:
@@ -5847,6 +5853,7 @@ packages:
       '@tsconfig/node12': 1.0.9
       '@tsconfig/node14': 1.0.1
       '@tsconfig/node16': 1.0.2
+      '@types/node': 14.18.3
       acorn: 8.6.0
       acorn-walk: 8.2.0
       arg: 4.1.3
@@ -5855,6 +5862,22 @@ packages:
       make-error: 1.3.6
       typescript: 4.5.4
       yn: 3.1.1
+    dev: true
+
+  /ts-patch/2.0.1_typescript@4.5.4:
+    resolution: {integrity: sha512-mP7beU1QkmyDs1+SzXYVaSTD6Xo7ZCibOJ3sZkb/xsQjoAQXvn4oPjk0keC2LfCNAgilqtqgjiWp3pQri1uz4w==}
+    hasBin: true
+    peerDependencies:
+      typescript: '>=4.0.0'
+    dependencies:
+      chalk: 4.1.2
+      glob: 7.2.0
+      global-prefix: 3.0.0
+      minimist: 1.2.5
+      resolve: 1.20.0
+      shelljs: 0.8.4
+      strip-ansi: 6.0.1
+      typescript: 4.5.4
     dev: true
 
   /tsconfig-paths/3.12.0:
@@ -5984,6 +6007,15 @@ packages:
     resolution: {integrity: sha512-zdu8XMNEDepKKR+XYOXAVPtWui0ly0NtohUscw+UmaHiAWT8hrV1rr//H6V+0DvJ3OQ19S979M0laLfX8rm82Q==}
     dependencies:
       is-typedarray: 1.0.0
+    dev: true
+
+  /typescript-transform-paths/3.3.1_typescript@4.5.4:
+    resolution: {integrity: sha512-c+8Cqd2rsRtTU68rJI0NX/OtqgBDddNs1fIxm1nCNyhn0WpoyqtpUxc1w9Ke5c5kgE4/OT5xYbKf2cf694RYEg==}
+    peerDependencies:
+      typescript: '>=3.6.5'
+    dependencies:
+      minimatch: 3.0.4
+      typescript: 4.5.4
     dev: true
 
   /typescript/3.9.10:
