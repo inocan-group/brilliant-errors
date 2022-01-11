@@ -31,7 +31,7 @@
     "autoindex": "yarn do autoindex",
     "clean": "rimraf dist/*",
     "build": "run-s clean autoindex build:bundle",
-    "build:bundle": "npx tsup src/index.ts --format='esm,cjs' --dts",
+    "build:bundle": "npx tsup src/index.ts --format=esm,cjs --dts",
     "latest": "yarn do latest -v",
     "lint": "run-s lint:*",
     "lint:src": "eslint src/**/*.ts",
@@ -40,7 +40,7 @@
     "test": "jest",
     "watch": "run-p watch:*",
     "watch:ai": "npx dd autoindex --watch",
-    "watch:tsup": "npx tsup src/index.ts --format='esm,cjs' --dts --watch"
+    "watch:tsup": "npx tsup src/index.ts --format=esm,cjs --dts --watch"
   },
   "devDependencies": {
     "@type-challenges/utils": "^0.1.1",
