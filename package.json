@@ -1,6 +1,6 @@
 {
   "name": "brilliant-errors",
-  "version": "0.6.0",
+  "version": "0.5.6",
   "description": "A set of configurators to help your Apps and Libraries build brilliant error classes",
   "keywords": [
     "error-management"
@@ -37,6 +37,7 @@
     "lint:src": "eslint src/**/*.ts",
     "lint:test": "eslint test/**/*.ts",
     "lint:tsc": "tsc --noEmit",
+    "audit:fix": "pnpm audit --fix",
     "test": "vitest",
     "test:ci": "vitest run",
     "watch": "run-p watch:*",
@@ -70,5 +71,11 @@
   },
   "engines": {
     "node": ">=12.0.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "simple-git@<3.3.0": ">=3.3.0",
+      "simple-git@<3.5.0": ">=3.5.0"
+    }
   }
 }
