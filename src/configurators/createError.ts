@@ -1,5 +1,4 @@
 /* eslint-disable brace-style */
-
 import {
   IErrorConfigOptions,
   IBrilliantError,

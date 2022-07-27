@@ -3,8 +3,9 @@ import { ConstructorFor, ErrorHttpCodes, ErrorOptions, ErrorSubTypes, ErrorTypes
 import type { TypeGuard } from "inferred-types";
 import { createError } from "~/configurators";
 import { isBrilliantError } from "~/@guards";
+import { describe, it, expect } from "vitest";
 
-describe("using MessageContructor", () => {
+describe("using MessageConstructor", () => {
   it("createError() types are correct for each partial application", () => {
     const TYPE = "standard";
     const nameAndApp = createError("MyError", "MyApp");
