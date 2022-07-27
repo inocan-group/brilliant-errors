@@ -1,4 +1,4 @@
-import type { ErrorConstructorType, IBrilliantError, IConstructorProps } from "~/@types";
+import type { ErrorConstructorType, IBrilliantError, IConstructorProps } from "src/@types";
 import standard from "./standard";
 import wrapper from "./wrapper";
 import network from "./network";

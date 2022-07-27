@@ -5,8 +5,8 @@ import {
   IConstructorProps,
   IErrorRuntimeOptions,
   StandardConstructor,
-} from "~/@types";
-import { prettyStack } from "~/shared";
+} from "src/@types";
+import { prettyStack } from "src/shared";
 
 export default <
     N extends string,

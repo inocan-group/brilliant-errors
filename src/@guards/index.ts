@@ -1,5 +1,5 @@
 import { IDictionary } from "common-types";
-import { IBrilliantError } from "~/@types";
+import { IBrilliantError } from "src/@types";
 
 export function isBrilliantError(
   error: unknown

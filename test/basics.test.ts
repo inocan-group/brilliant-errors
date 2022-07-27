@@ -1,8 +1,14 @@
 import { Expect, Equal } from "@type-challenges/utils";
-import { ConstructorFor, ErrorHttpCodes, ErrorOptions, ErrorSubTypes, ErrorTypes } from "~/@types";
+import {
+  ConstructorFor,
+  ErrorHttpCodes,
+  ErrorOptions,
+  ErrorSubTypes,
+  ErrorTypes,
+} from "src/@types";
 import type { TypeGuard } from "inferred-types";
-import { createError } from "~/configurators";
-import { isBrilliantError } from "~/@guards";
+import { createError } from "src/configurators";
+import { isBrilliantError } from "src/@guards";
 import { describe, it, expect } from "vitest";
 
 describe("using MessageConstructor", () => {

@@ -11,9 +11,9 @@ import {
   ErrorOptions,
   TypeSubtype,
   TypeGuard,
-} from "~/@types";
+} from "src/@types";
 import callsites, { CallSite } from "callsites";
-import { isBrilliantError } from "~/@guards";
+import { isBrilliantError } from "src/@guards";
 import getConstructor from "./constructors";
 
 /**

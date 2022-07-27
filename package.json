@@ -40,7 +40,7 @@
     "audit:fix": "pnpm audit --fix",
     "test": "vitest",
     "test:ci": "vitest run",
-    "release": "run-s lint release:latest test:ci audit:fix build:validation release:bump",
+    "release": "run-s lint release:latest test:ci audit:fix release:bump",
     "release:latest": "pnpm install",
     "release:bump": "bumpp",
     "watch": "run-p watch:*",

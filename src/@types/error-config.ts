@@ -1,7 +1,7 @@
 import { TypeGuard } from "inferred-types";
 import { IBrilliantError } from "./IBriliantError";
 import { BrillianErrorTypeGuard } from "../@guards";
-import type { ConstructorFor } from "~/@types";
+import type { ConstructorFor } from "src/@types";
 import { TypeSubtype } from "common-types";
 
 /**

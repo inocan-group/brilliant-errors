@@ -1,6 +1,6 @@
 import { CallSite } from "callsites";
 import { TypeSubtype } from "common-types";
-import type { ErrorConstructorType } from "~/@types";
+import type { ErrorConstructorType } from "src/@types";
 
 /**
  * Defines the structure of a [Brilliant Error](https://github.com/inocan-group/brilliant-errors).

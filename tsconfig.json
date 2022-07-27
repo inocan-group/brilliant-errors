@@ -19,7 +19,7 @@
     "declarationMap": true,
     "outDir": "dist",
     "paths": {
-      "~/*": [
+      "src/*": [
         "src/*"
       ]
     }
