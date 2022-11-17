@@ -8,3 +8,4 @@ yarn-error.log*
 *.rsls
 *.rsl*
 .DS_Store
+.tsbuildinfo
