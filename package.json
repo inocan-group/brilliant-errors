@@ -15,13 +15,14 @@
   },
   "license": "MIT",
   "author": "Ken Snyder <ken@ken.net>",
-  "main": "./dist/index.js",
-  "module": "./dist/index.mjs",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "type": "module",
   "typings": "./dist/index.d.ts",
   "exports": {
     ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     }
   },
   "files": [
@@ -30,8 +31,7 @@
   "scripts": {
     "autoindex": "yarn do autoindex",
     "clean": "rimraf dist/*",
-    "build": "run-s clean autoindex build:bundle",
-    "build:bundle": "npx tsup src/index.ts --format=esm,cjs --dts",
+    "build": "tsup src/index.ts --format=esm,cjs --dts --clean",
     "latest": "yarn do latest -v",
     "lint": "run-s lint:*",
     "lint:src": "eslint src/**/*.ts",
@@ -74,7 +74,7 @@
     "inferred-types": "^0.33.1"
   },
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=14.0.0"
   },
   "pnpm": {
     "overrides": {
