@@ -5,9 +5,6 @@ import { defineConfig } from "vite";
 export default defineConfig({
   test: {
     dir: "test",
-    api: {
-      host: "0.0.0.0",
-    },
   },
   plugins: [],
 });
