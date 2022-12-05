@@ -40,7 +40,11 @@
     "test:ci": "vitest run",
     "watch": "run-p watch:*",
     "watch:ai": "npx dd autoindex --watch",
-    "watch:tsup": "npx tsup src/index.ts --format=esm,cjs --dts --watch"
+    "watch:tsup": "npx tsup src/index.ts --format=esm,cjs --dts --watch",
+    "release": "run-s build lint test:ci release:latest audit:fix release:bump",
+    "release:latest": "pnpm install",
+    "release:bump": "bumpp",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "@type-challenges/utils": "^0.1.1",
@@ -60,6 +64,7 @@
     "vite": "^3.2.5"
   },
   "dependencies": {
+    "bumpp": "^8.2.1",
     "callsites": "^4.0.0",
     "common-types": "^1.33.2",
     "inferred-types": "^0.35.0",
