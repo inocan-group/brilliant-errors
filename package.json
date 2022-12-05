@@ -17,8 +17,8 @@
   "author": "Ken Snyder <ken@ken.net>",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
-  "type": "module",
   "typings": "./dist/index.d.ts",
+  "type": "module",
   "exports": {
     ".": {
       "import": "./dist/index.js",
@@ -29,9 +29,7 @@
     "dist"
   ],
   "scripts": {
-    "autoindex": "yarn do autoindex",
-    "clean": "rimraf dist/*",
-    "build": "tsup src/index.ts --format=esm,cjs --dts --clean",
+    "build": "npx tsup src/index.ts --format=esm,cjs --dts --clean",
     "latest": "yarn do latest -v",
     "lint": "run-s lint:*",
     "lint:src": "eslint src/**/*.ts",
@@ -44,35 +42,36 @@
     "release:latest": "pnpm install",
     "release:bump": "bumpp",
     "watch": "run-p watch:*",
-    "watch:bundle": "tsup src/index.ts --format=esm,cjs --dts --watch",
-    "watch:test": "vitest ui"
+    "watch:ai": "npx dd autoindex --watch",
+    "watch:tsup": "npx tsup src/index.ts --format=esm,cjs --dts --watch",
+    "release": "run-s build lint test:ci release:latest audit:fix release:bump",
+    "release:latest": "pnpm install",
+    "release:bump": "bumpp",
+    "prepublishOnly": "npm run build"
   },
   "devDependencies": {
     "@type-challenges/utils": "^0.1.1",
-    "@types/node": "^14.18.33",
-    "@typescript-eslint/eslint-plugin": "^5.43.0",
-    "@typescript-eslint/parser": "^5.43.0",
-    "@vitest/ui": "^0.25.2",
-    "bumpp": "^8.2.1",
-    "eslint": "^8.27.0",
+    "@types/node": "^14.18.34",
+    "@typescript-eslint/eslint-plugin": "^5.45.1",
+    "@typescript-eslint/parser": "^5.45.1",
+    "eslint": "^8.29.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-promise": "^6.1.1",
-    "eslint-plugin-unicorn": "^44.0.2",
+    "eslint-plugin-unicorn": "^45.0.1",
     "npm-run-all": "^4.1.5",
-    "pathe": "^1.0.0",
-    "prettier": "^2.7.1",
-    "rimraf": "^3.0.2",
+    "prettier": "^2.8.0",
     "tsup": "^6.5.0",
     "typescript": "^4.9.3",
-    "vite": "^3.2.4",
-    "vitest": "^0.25.2"
+    "vite": "^3.2.5"
   },
   "dependencies": {
+    "bumpp": "^8.2.1",
     "callsites": "^4.0.0",
     "common-types": "^1.33.2",
-    "inferred-types": "^0.33.1"
+    "inferred-types": "^0.35.0",
+    "vitest": "^0.25.4"
   },
   "engines": {
     "node": ">=14.0.0"
