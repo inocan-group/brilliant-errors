@@ -15,21 +15,19 @@
   },
   "license": "MIT",
   "author": "Ken Snyder <ken@ken.net>",
-  "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "typings": "./dist/index.d.ts",
   "type": "module",
   "exports": {
     ".": {
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "import": "./dist/index.js"
     }
   },
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "npx tsup src/index.ts --format=esm,cjs --dts --clean",
+    "build": "npx tsup src/index.ts --format=esm --dts --clean",
     "latest": "yarn do latest -v",
     "lint": "run-s lint:*",
     "lint:src": "eslint src/**/*.ts",
@@ -40,7 +38,7 @@
     "test:ci": "vitest run",
     "watch": "run-p watch:*",
     "watch:ai": "npx dd autoindex --watch",
-    "watch:tsup": "npx tsup src/index.ts --format=esm,cjs --dts --watch",
+    "watch:tsup": "npx tsup src/index.ts --format=esm --dts --watch",
     "release": "run-s build lint test:ci release:latest audit:fix release:bump",
     "release:latest": "pnpm install",
     "release:bump": "bumpp",

@@ -1,5 +1,7 @@
 # Brilliant Errors
 
+> **Note:** the version 6.x of this library had moved to newer dependencies wand the `callsites` library  _only_ support the ESM module system these days but because we were packaging up in both ESM and CJS it was causing errors. I had intended to keep CJS around for a while longer but in most cases you really should be preferring ESM anyway. In version **7.x** and going forward we are only publishing version ESM. If you still need CJS you can use the latest `0.5.x` release.
+
 The base errors you get from Javascript leave a lot to be desired and this library attempts to provide a _consistent_ way to provide solid meta information on errors raised in Typescript/Javascript projects.
 
 This library provides two _configurators_ for errors:
@@ -33,7 +35,6 @@ This library provides two _configurators_ for errors:
     // instantiotion
     const error = new HttpError(403, "couldn't find member's id", "no-membership-id");
 
-
 All errors have the following attributes:
 
 - `kind` - a string literal type for the error family the error originates from
@@ -48,6 +49,7 @@ They also have brilliant `.toJSON()` and `message` outputs which shine above the
 For a repo which wants to use these configurators, you will create a file in your repo for the new error and then configure it something like this:
 
 `src/error/MyError.ts`:
+
 ```ts
 export default MyError = createLibraryError('MyError', { ... });
 ```
