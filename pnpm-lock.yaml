@@ -20,6 +20,7 @@ specifiers:
   eslint-plugin-unicorn: ^45.0.1
   inferred-types: ^0.35.0
   npm-run-all: ^4.1.5
+  pathe: ^1.0.0
   prettier: ^2.8.0
   tsup: ^6.5.0
   typescript: ^4.9.3
@@ -45,6 +46,7 @@ devDependencies:
   eslint-plugin-promise: 6.1.1_eslint@8.29.0
   eslint-plugin-unicorn: 45.0.1_eslint@8.29.0
   npm-run-all: 4.1.5
+  pathe: 1.0.0
   prettier: 2.8.0
   tsup: 6.5.0_typescript@4.9.3
   typescript: 4.9.3
@@ -2016,6 +2018,10 @@ packages:
   /path-type/4.0.0:
     resolution: {integrity: sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==}
     engines: {node: '>=8'}
+    dev: true
+
+  /pathe/1.0.0:
+    resolution: {integrity: sha512-nPdMG0Pd09HuSsr7QOKUXO2Jr9eqaDiZvDwdyIhNG5SHYujkQHYKDfGQkulBxvbDHz8oHLsTgKN86LSwYzSHAg==}
     dev: true
 
   /pathval/1.1.1:
