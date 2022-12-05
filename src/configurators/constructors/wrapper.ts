@@ -31,5 +31,5 @@ export default <
           underlying.name
         }\n\n${prettyStack(ctx.structuredStack)}`;
 
-    delete ctx.structuredStack;
+    ctx.structuredStack = [];
   };
