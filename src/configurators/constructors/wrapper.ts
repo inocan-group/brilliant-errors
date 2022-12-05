@@ -30,4 +30,6 @@ export default <
       : `${underlying.message} [ ${classification} ]: wrapped error ${
           underlying.name
         }\n\n${prettyStack(ctx.structuredStack)}`;
+
+    delete ctx.structuredStack;
   };
