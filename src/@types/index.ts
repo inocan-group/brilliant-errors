@@ -6,7 +6,7 @@
 
 // file exports
 export * from "./BaseBrilliance";
-export * from "./IBriliantError";
+export * from "./IBrilliantError";
 export * from "./constructors";
 export * from "./error-config";
 export * from "./general";

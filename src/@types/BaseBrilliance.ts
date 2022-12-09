@@ -1,5 +1,6 @@
-import { TypeSubtype } from "common-types";
+
 import type { CallSite } from "callsites";
+import { TypeSubtype } from "./IBrilliantError";
 
 export abstract class BaseBrilliance<
   /** type */

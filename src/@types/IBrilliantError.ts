@@ -1,6 +1,7 @@
 import { CallSite } from "callsites";
-import { TypeSubtype } from "common-types";
 import type { ErrorConstructorType } from "src/@types";
+
+export type TypeSubtype<T extends string = string, S extends string =string> = `${T}/${S}`;
 
 /**
  * Defines the structure of a [Brilliant Error](https://github.com/inocan-group/brilliant-errors).

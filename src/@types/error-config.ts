@@ -1,8 +1,8 @@
 import { TypeGuard } from "inferred-types";
-import { IBrilliantError } from "./IBriliantError";
-import { BrillianErrorTypeGuard } from "../@guards";
+import { IBrilliantError, TypeSubtype } from "./IBrilliantError";
+import { BrilliantErrorTypeGuard } from "../@guards";
 import type { ConstructorFor } from "src/@types";
-import { TypeSubtype } from "common-types";
+
 
 /**
  * The constructor when using a "network" error from Brilliant Errors
@@ -75,7 +75,7 @@ export type BrilliantErrorTuple<
 > = [
   ConstructorFor<N, A, T, S, H, C>,
   TypeGuard<IBrilliantError<N, A, T, S, H, C>>,
-  BrillianErrorTypeGuard
+  BrilliantErrorTypeGuard
 ];
 
 /**
