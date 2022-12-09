@@ -1,9 +1,10 @@
-import { TypeSubtype } from "common-types";
+
 import {
   ErrorConstructorType,
   IBrilliantError,
   IConstructorProps,
   NetworkConstructor,
+  TypeSubtype,
 } from "src/@types";
 import { prettyStack } from "src/shared";
 
